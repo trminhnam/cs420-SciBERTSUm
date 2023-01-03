@@ -7,3 +7,5 @@ alakitensorboard_log*
 bert_data*
 json_data*
 temp*
+grobid_client_python/*
+grobid/*
