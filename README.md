@@ -87,4 +87,24 @@ python train.py  -ext_dropout 0.1 -lr 2e-3  -train_from ../models/model_step_990
 python train.py -mode test  -test_batch_size 1 -bert_data_path ../bert_data -log_file ../logs/ext_bert_test -test_from ../models/model_step_99000.pt -model_path ../models -sep_optim true -use_interval true -visible_gpus 1,2,3 -alpha 0.95 -result_path ../results/ext 
 ```
 
+### Deployment
 
+The model is delpoyed in a Streamlit app.
+
+First, at the root folder, install [Grobid](https://grobid.readthedocs.io/en/latest/Install-Grobid/) for pdf extraction. You can run the following command in ther terminal to install Grobid:
+```
+git clone https://github.com/kermitt2/grobid.git
+cd grobid
+./gradlew clean install
+```
+
+Then, you run the GROBID Service API with the command:
+```
+./gradlew run
+```
+
+Next, to run the Streamlit application, please **open a new terminal** and run the following command from root directory:
+```
+cd src
+streamlit run app.py
+```
