@@ -18,7 +18,7 @@ def str2bool(v):
         raise argparse.ArgumentTypeError('Boolean value expected.')
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-load_from", default='../alakimodels_27000_steps/model_step_27000.pt', type=str)
+parser.add_argument("-load_from", default='../alakimodels/last.pt', type=str)
 parser.add_argument("-select_mode", default='greedy', type=str)
 parser.add_argument("-shard_size", default=50, type=int)
 parser.add_argument('-min_src_nsents', default=20, type=int)
@@ -73,6 +73,9 @@ def preprocess(pdf_path):
         outfile.write(line.strip() + '\n')
     outfile.close()
 
+    with open("mapping_for_corenlp.txt", 'w') as f:
+        f.write(outfile_path + '\n')
+
     # Run CoreNLP
     command = ['java', 'edu.stanford.nlp.pipeline.StanfordCoreNLP', '-annotators', 'tokenize,ssplit',
                 'always', '-filelist', 'mapping_for_corenlp.txt', '-outputFormat',
@@ -80,7 +83,7 @@ def preprocess(pdf_path):
 
     subprocess.call(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    assert os.path.exists(outfile_path), "CoreNLP failed to produce output file"
+    assert os.path.exists(outfile_path + ".json"), "CoreNLP failed to produce output file"
 
     # make data
     pdf_json = os.path.join(args.temp_dir, "paper.sections.txt.json")
@@ -122,6 +125,11 @@ def preprocess(pdf_path):
                         'src_txt': src_txt, "tgt_txt": tgt_txt, "sections": sections, "token_sections": token_sections}
 
         return b_data_dict
+
+    # clean temp
+    os.remove(outfile_path)
+    os.remove(outfile_path + ".json")
+    os.remove("mapping_for_corenlp.txt")
 
     data = format_to_bert(args, corpus_type, data_json)
     return data
@@ -183,13 +191,10 @@ def predict(args, model, pdf_path, device):
     data, src_txt = post_process(extracted_data, device)
     mask_cls = data['mask_cls']
     sent_scores, mask = model(**data)
-
     batch_size, sent_count = mask_cls.shape
     sent_scores = sent_scores[:, :sent_count]  # remove padded items from returned scores
-
     sent_scores = sent_scores.cpu().data.numpy()
     selected_ids = np.argsort(-sent_scores, 1)[0]
-
     # sort src text by section
     src_txt = [src_txt[i] for i in selected_ids]
 
