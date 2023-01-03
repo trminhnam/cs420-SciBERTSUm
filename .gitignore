@@ -1,3 +1,9 @@
-stanford-corenlp-4.2.2/*
-raw_data/*
+stanford-corenlp*
+raw_data*
 src/bert-base-uncased.tar.gz
+__pycache__
+alakimodels*
+alakitensorboard_log*
+bert_data*
+json_data*
+temp*

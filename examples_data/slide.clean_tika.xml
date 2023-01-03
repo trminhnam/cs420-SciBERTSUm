@@ -1,0 +1,327 @@
+<?xml version="1.0" ?>
+<Presentation>
+  <div class="page">
+    <p>Approximation Algorithms for Combinatorial Auctions with Complement-Free BiddersSpeaker: Michael Schapira</p>
+    <p>Joint work with Shahar Dobzinski &amp; Noam Nisan</p>
+  </div>
+  <div class="page">
+    <p>Talk Structure</p>
+    <p>Combinatorial Auctions  Log(m)-approximation for CF auctions  An incentive compatible O(m1/2)</p>
+    <p>approximation of CF auctions using value queries.</p>
+    <p>2-approximation for XOS auctions  A lower bound of e/(e-1)- for XOS auctions</p>
+  </div>
+  <div class="page">
+    <p>Combinatorial Auctions</p>
+    <p>A set M of items for sale. |M|=m.</p>
+    <p>n bidders, each bidder i has a valuation function vi:2M-&gt;R+. Common assumptions:</p>
+    <p>Normalization: vi()=0  Free disposal: ST  vi(T)  vi(S)</p>
+    <p>Goal: find a partition S1,,Sn such that social welfare vi(Si) is maximized</p>
+  </div>
+  <div class="page">
+    <p>Combinatorial Auctions</p>
+    <p>Problem 1: finding an optimal allocation is NPhard.</p>
+    <p>Problem 2: valuation length is exponential in m.</p>
+    <p>Problem 3: how can we be certain that the bidders do not lie ? (incentive compatibility)</p>
+  </div>
+  <div class="page">
+    <p>Combinatorial Auctions</p>
+    <p>We are interested in algorithms that based on the reported valuations {vi }i output an allocation which is an approximation to the optimal social welfare.</p>
+    <p>We require the algorithms to be polynomial in m and n. That is, the algorithms must run in sublinear (polylogarithmic) time.</p>
+    <p>We explore the achievable approximation factors.</p>
+  </div>
+  <div class="page">
+    <p>Access Models</p>
+    <p>How can we access the input ?</p>
+    <p>One possibility: bidding languages.</p>
+    <p>The black box approach: each bidder is represented by an oracle which can answer certain queries.</p>
+  </div>
+  <div class="page">
+    <p>Access Models  Common types of queries:</p>
+    <p>Value: given a bundle S, return v(S).</p>
+    <p>Demand: given a vector of prices (p1,, pm) return the bundle S that maximizes v(S)-jSpj.</p>
+    <p>General: any possible type of query (the comunication model).</p>
+    <p>Demand queries are strictly more powerful than value queries (Blumrosen-Nisan, Dobzinski-Schapira)</p>
+  </div>
+  <div class="page">
+    <p>Known Results  Finding an optimal solution requires</p>
+    <p>exponential communication. Nisan-Segal  Finding an O(m1/2-)-approximation requires</p>
+    <p>exponential communication. Nisan-Segal. (this result holds for every possible type of oracle)</p>
+    <p>Using demand oracles, a matching upper bound of O(m1/2) exists (Blumrosen-Nisan).</p>
+    <p>Better results might be obtained by restricting the classes of valuations.</p>
+  </div>
+  <div class="page">
+    <p>The Hierarchy of CF Valuations  Complement-Free: v(ST)  v(S) + v(T).</p>
+    <p>XOS: XOR of ORs of singletons  Example: (A:2 OR B:2) XOR (A:3)</p>
+    <p>Submodular: v(ST) + v(ST)  v(S) + v(T).  2-approximation by LLN.</p>
+    <p>GS: (Gross) Substitutes, OXS: OR of XORs of singletons  Solvable in polynomial time (LP and Maximum Weighted Matching</p>
+    <p>respectively)</p>
+    <p>OXS  GS  SM  XOS  CF Lehmann, Lehmann, Nisan</p>
+  </div>
+  <div class="page">
+    <p>Talk Structure</p>
+    <p>Combinatorial Auctions  Log(m)-approximation for CF auctions  An incentive compatible O(m1/2)</p>
+    <p>approximation CF auctions using value queries.</p>
+    <p>2-approximation for XOS auctions  A lower bound of e/(e-1)- for XOS auctions</p>
+  </div>
+  <div class="page">
+    <p>Intuition</p>
+    <p>We will allow the auctioneer to allocate k duplicates from each item.</p>
+    <p>Each bidder is still interested in at most one copy of each item (so valuations are kept the same).</p>
+    <p>Using the assumption that all valuations are CF, we will find an approximation to the original auction, based on the k-duplicates allocation.</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 1</p>
+    <p>Solve the linear relaxation of the problem: Maximize: i,Sxi,Svi(S) Subject To:  For each item j: i,S|jSxi,S  1  For each bidder i: Sxi,S  1  For each i,S: xi,S  0</p>
+    <p>Despite the exponential number of variables, the LP relaxation may still be solved in polynomial time using demand oracles.(Nisan-Segal).</p>
+    <p>OPT*=i,Sxi,Svi(S) is an upper bound for the value of the optimal integral allocation.</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 2</p>
+    <p>Use randomized rounding to build a preallocation S1,..,Sn:  Each item j appears at most k=O(log(m)) times in</p>
+    <p>{Si}i.  ivi(Si)  OPT*/2.</p>
+    <p>Randomized Rounding: For each bidder i, let Si be the bundle S with probability xi,S, and the empty set with probability 1-Sxi,S.  The expected value of vi(Si) is Sxi,Svi(S)</p>
+    <p>We use the Chernoff bound to show that such pre-allocation is built with high probability.</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 3</p>
+    <p>For each bidder i, partition Si into a disjoint union Si = Si1.. Sik such that for each 1i&lt;i n, 1tt k, SitSit=.</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 3</p>
+    <p>For each bidder i, partition Si into a disjoint union Si = Si1.. Sik such that for each 1i&lt;i n, 1tt k, SitSit=.</p>
+    <p>A B D</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 3</p>
+    <p>For each bidder i, partition Si into a disjoint union Si = Si1.. Sik such that for each 1i&lt;i n, 1tt k, SitSit=.</p>
+    <p>A B D</p>
+    <p>S1 1 = {A,B,D}</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 3</p>
+    <p>For each bidder i, partition Si into a disjoint union Si = Si1.. Sik such that for each 1i&lt;i n, 1tt k, SitSit=.</p>
+    <p>A B DC E</p>
+    <p>A D</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 3</p>
+    <p>For each bidder i, partition Si into a disjoint union Si = Si1.. Sik such that for each 1i&lt;i n, 1tt k, SitSit=.</p>
+    <p>C E</p>
+    <p>A D S2</p>
+    <p>S2 2 = {A,D}</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 3</p>
+    <p>For each bidder i, partition Si into a disjoint union Si = Si1.. Sik such that for each 1i&lt;i n, 1tt k, SitSit=.</p>
+    <p>A B DC E</p>
+    <p>A DC E</p>
+    <p>A</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 3</p>
+    <p>For each bidder i, partition Si into a disjoint union Si = Si1.. Sik such that for each 1i&lt;i n, 1tt k, SitSit=.</p>
+    <p>C E</p>
+    <p>A S3</p>
+    <p>S3 3 = {A}</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 3</p>
+    <p>For each bidder i, partition Si into a disjoint union Si = Si1.. Sik such that for each 1i&lt;i n, 1tt k, SitSit=.</p>
+    <p>A B DC E</p>
+    <p>A DC E</p>
+    <p>A</p>
+    <p>B</p>
+    <p>D</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 3</p>
+    <p>For each bidder i, partition Si into a disjoint union Si = Si1.. Sik such that for each 1i&lt;i n, 1tt k, SitSit=.</p>
+    <p>A B DC E</p>
+    <p>A DC E</p>
+    <p>A</p>
+    <p>B</p>
+    <p>DB C E</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Step 4  Find the t maximizes ivi(Sit)  Return the allocation (S1t,...,Snt).</p>
+    <p>All valuations are CF so: tivi(Sit) = itvi(Sit)  ivi(Si)  OPT*/2  For the t that maximizes ivi(Sit), it holds that:</p>
+    <p>ivi(Sit)  (ivi(Si))/k  OPT*/2k = OPT*/O(log(m)).</p>
+    <p>A B DC E</p>
+    <p>A DC E</p>
+    <p>A</p>
+    <p>B</p>
+    <p>DB C E</p>
+  </div>
+  <div class="page">
+    <p>A Communication Lower Bound of 2- for CF Valuations Theorem: Exponential communication is</p>
+    <p>required for approximating the optimal allocation among CF bidders to any factor less than 2.</p>
+    <p>Proof: A simple reduction from the general case.</p>
+  </div>
+  <div class="page">
+    <p>Talk Structure</p>
+    <p>Combinatorial Auctions  Log(m)-approximation for CF auctions  An incentive compatible O(m1/2)</p>
+    <p>approximation of CF auctions using value queries.</p>
+    <p>2-approximation for XOS auctions  A lower bound of e/(e-1)- for XOS auctions</p>
+  </div>
+  <div class="page">
+    <p>Incentive Compatibility &amp; VCG Prices  We want an algorithm that is truthful (incentive</p>
+    <p>compatible). I.e. we require that the dominant strategy of each of the bidders would be to reveal true information.</p>
+    <p>VCG is the only general technique known for making auctions incentive compatible (if bidders are not single-minded):  Each bidder i pays: kivk(O-i) - kivk(Oi)</p>
+    <p>Oi is the optimal allocation, O-i the optimal allocation of the auction without the ith bidder.</p>
+  </div>
+  <div class="page">
+    <p>Incentive Compatibility &amp; VCG Prices  Problem: VCG requires an optimal allocation!</p>
+    <p>Finding an optimal allocation requires exponential communication and is computationally intractable.</p>
+    <p>Approximations do not suffice (Nisan-Ronen).</p>
+  </div>
+  <div class="page">
+    <p>VCG on a Subset of the Range  Our solution: limit the set of possible</p>
+    <p>allocations.  We will let each bidder to get at most one item, or</p>
+    <p>well allocate all items to a single bidder.</p>
+    <p>Optimal solution in the set can be found in polynomial time  VCG prices can be computed  incentive compatibility.</p>
+    <p>We still need to prove that we achieve an approximation.</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm</p>
+    <p>Ask each bidder i for vi(M), and for vi(j), for each item j. (We have used only value queries)</p>
+    <p>Construct a bipartite graph and find the maximum weighted matching P.</p>
+    <p>can be done in polynomial time (Tarjan).</p>
+    <p>A</p>
+    <p>B</p>
+    <p>Items</p>
+    <p>Bidders</p>
+    <p>v1(A)</p>
+    <p>v3(B)</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm (Cont.)</p>
+    <p>Let i be the bidder that maximizes vi(M).  If vi(M)&gt;|P|</p>
+    <p>Allocate all items to i.</p>
+    <p>else  Allocate according to P.</p>
+    <p>Let each bidder pay his VCG price (in respect to the restricted set).</p>
+  </div>
+  <div class="page">
+    <p>Proof of the Approximation RatioTheorem: If all valuations are CF, the algorithm provides an</p>
+    <p>O(m1/2)-approximation.</p>
+    <p>Proof: Let OPT=(T1,..,Tk,Q1,...,Ql), where for each Ti, |Ti|&gt;m1/2, and for each Qi, |Qi|m1/2. |OPT|= ivi(Ti) + ivi(Qi)</p>
+    <p>Case 1: ivi(Ti) &gt; ivi(Qi) (large bundles contribute most of the social welfare)</p>
+    <p>ivi(Ti) &gt; |OPT|/2 At most m1/2 bidders get at least m1/2 items in OPT.  For the bidder i the bidder i that maximizes vi(M), vi(M) &gt; |OPT|/2m</p>
+    <p>Case 2: ivi(Qi)  ivi(Ti) (small bundles contribute most of the social welfare)</p>
+    <p>ivi(Qi)  |OPT|/2 For each bidder i, there is an item ci, such that: vi(ci) &gt; vi(Qi) / m</p>
+    <p>{ci}i is an allocation which assigns at most one item to each bidder: |P|  ivi(ci)  |OPT|/2m</p>
+  </div>
+  <div class="page">
+    <p>Talk Structure</p>
+    <p>Combinatorial Auctions  Log(m)-approximation for CF auctions  An incentive compatible O(m1/2)</p>
+    <p>approximation CF auction  2-approximation for XOS auctions  A lower bound of e/(e-1)- for XOS auctions</p>
+  </div>
+  <div class="page">
+    <p>Definition of XOS</p>
+    <p>XOS: XOR of ORs of Singletons.</p>
+    <p>Singleton valuation (x:p)  v(S) = p xS</p>
+    <p>Example: (A:2 OR B:2) XOR (A:3)</p>
+  </div>
+  <div class="page">
+    <p>XOS Properties</p>
+    <p>The strongest bidding language syntactically restricted to represent only complement-free valuations.</p>
+    <p>Can describe all submodular valuations (and also some non-submodular valuations)</p>
+    <p>Can describe interesting NPC problems (Max-k-Cover, SAT).</p>
+  </div>
+  <div class="page">
+    <p>Supporting Prices</p>
+    <p>Definition: p1,,pm supports the bundle S in v if:  v(S) = jSpj  v(T)  jTpj for all T  S</p>
+    <p>Claim: a valuation is XOS iff every bundle S has supporting prices.</p>
+    <p>Proof:   There is a clause that maximizes the value of a bundle S.</p>
+    <p>The prices in this clause are the supporting prices.   Take the prices of each bundle, and build a clause.</p>
+  </div>
+  <div class="page">
+    <p>Algorithm-Example Items: {A, B, C, D, E}. 3 bidders.</p>
+    <p>Price vector: p0=(0,0,0,0,0) v1: (A:1 OR B:1 OR C:1) XOR (C:2) Bidder 1 gets his demand: {A,B,C}.</p>
+  </div>
+  <div class="page">
+    <p>Algorithm-Example Items: {A, B, C, D, E}. 3 bidders.</p>
+    <p>Price vector: p0=(0,0,0,0,0) v1: (A:1 OR B:1 OR C:1) XOR (C:2) Bidder 1 gets his demand: {A,B,C}.</p>
+    <p>Price vector: p1=(1,1,1,0,0) v2: (A:1 OR B:1 OR C:9) XOR (D:2 OR E:2) Bidder 2 gets his demand: {C}</p>
+  </div>
+  <div class="page">
+    <p>Algorithm-Example Items: {A, B, C, D, E}. 3 bidders.</p>
+    <p>Price vector: p0=(0,0,0,0,0) v1: (A:1 OR B:1 OR C:1) XOR (C:2) Bidder 1 gets his demand: {A,B,C}.</p>
+    <p>Price vector: p1=(1,1,1,0,0) v2: (A:1 OR B:1 OR C:9) XOR (D:2 OR E:2) Bidder 2 gets his demand: {C}</p>
+    <p>Price vector: p2=(1,1,9,0,0) v3: (C:10 OR D:1 OR E:2) Bidder 3 gets his demand: {C,D,E}</p>
+    <p>Final allocation: {A,B} to bidder 1, {C,D,E} to bidder 3.</p>
+  </div>
+  <div class="page">
+    <p>The Algorithm  Input: n bidders, for each we are given a</p>
+    <p>demand oracle and a supporting prices oracle.</p>
+    <p>Init: p1==pm=0.  For each bidder i=1..n</p>
+    <p>Let Si be the demand of the ith bidder at prices p1, ,pm.</p>
+    <p>For all i &lt; i take away from Si any items from Si.  Let q1,,qm be the supporting prices for Si in vi.  For all j  Si update pj = qj.</p>
+  </div>
+  <div class="page">
+    <p>Proof</p>
+    <p>To prove the approximation ratio, we will need these two simple lemmas:</p>
+    <p>Lemma: The total social welfare generated by the algorithm is at least pj.</p>
+    <p>Lemma: The optimal social welfare is at most 2pj.</p>
+  </div>
+  <div class="page">
+    <p>Proof  Lemma 1</p>
+    <p>Lemma: The total social welfare generated by the algorithm is at least pj.</p>
+    <p>Proof:  Each bidder i got a bundle Ti at stage i.  At the end of the algorithm, he holds Ai  Ti.  The supporting prices guarantee that:</p>
+    <p>vi(Ai)  jAipj</p>
+  </div>
+  <div class="page">
+    <p>Proof  Lemma 2 Lemma: The optimal social welfare is at most 2pj.</p>
+    <p>Proof:  Let O1,...,On be the optimal allocation. Let pi,j be the price of the jth</p>
+    <p>item at the ith stage.  Each bidder i ask for the bundle that maximizes his</p>
+    <p>demand at the ith stage: vi(Oi)-jOi pi,j  j pi,j  j p(i-1),j</p>
+    <p>Since the prices are non-decreasing: vi (Oi )-jOi pn,j  j pi,j  j p(i-1),j</p>
+    <p>Summing up on both sides: i vi(Oi )-ijOi pn,j  i (j pi,j jp(i-1),j) i vi(Oi )-j pn,j  j pn,j i vi(Oi )  2j pn,j</p>
+  </div>
+  <div class="page">
+    <p>Talk Structure</p>
+    <p>Combinatorial Auctions  Log(m)-approximation for CF auctions  An incentive compatible O(m1/2)</p>
+    <p>approximation of CF auctions using value queries.</p>
+    <p>2-approximation for XOS auctions   A lower bound of e/(e-1)- for XOS</p>
+    <p>auctions</p>
+  </div>
+  <div class="page">
+    <p>XOS Lower Bounds:</p>
+    <p>We show two lower bounds:  A communication lower bound of e/(e-1)- for the</p>
+    <p>black box approach.  An NP-Hardness result of e/(e-1)- for the case</p>
+    <p>that the input is given in XOS format (bidding language).</p>
+    <p>We now prove the second of these results.</p>
+  </div>
+  <div class="page">
+    <p>Max-k-Cover</p>
+    <p>We will show a polynomial time reduction from Max-k-Cover.</p>
+    <p>Max-k-Cover definition:  Input: a set of |M|=m items, t subsets Si  M, an</p>
+    <p>integer k.  Goal: Find k subsets such that the number of</p>
+    <p>items in their union, |Si|, is maximized.</p>
+    <p>Theorem: approximating Max-k-Cover within a factor of e/(e-1) is NP-hard (Feige).</p>
+  </div>
+  <div class="page">
+    <p>The Reduction</p>
+    <p>A B C</p>
+    <p>D E F</p>
+    <p>v1: (A:1 OR D:1) XOR (C:1 OR F:1) XOR (D:1 OR E:1 OR F:1)</p>
+    <p>vk: (A:1 OR D:1) XOR (C:1 OR F:1) XOR (D:1 OR E:1 OR F:1)</p>
+    <p>Every solution to Max-k-Cover implies an allocation with the same value.  Every allocation implies a solution to Max-k-Cover with at least that</p>
+    <p>value.   Same approximation lower bound.  A matching communication lower bound exists.</p>
+    <p>Max-k-Cover Instance XOS Auction with k bidders</p>
+  </div>
+  <div class="page">
+    <p>Open Questions  Narrowing the GapsValuation</p>
+    <p>Class Value queries Demand</p>
+    <p>queries General</p>
+    <p>communication</p>
+    <p>General  m/(log1/2m) (Holzman, KfirDahav, Monderer, Tennenholz)</p>
+    <p>m/(logm) (Nisan-Segal, Dobzinki-Schapira)</p>
+    <p>m1/2(BlumrosenNisan)</p>
+    <p>m1/2(Nisan-Segal)</p>
+    <p>CF  m1/2  log(m)  2</p>
+    <p>XOS  2  e/(e-1)</p>
+    <p>SM  2(Lehmann,Lehmann,Nisan)  e/(e-1)(new: Khot, Lipton,Markakis,</p>
+    <p>Mehta)  1+1/(2m)(Nisan-Segal)</p>
+    <p>GS 1(Bertelsen, Lehmann)</p>
+  </div>
+</Presentation>
