@@ -1,4 +1,4 @@
-# LongScientificFormer
+# SciBERTSUM - A deep learning model with LongScientificFormer for scientific paper summarization
 
 For encoding a text longer than 512 tokens, for example 800. Set max_pos to 800 during both preprocessing and training.
 
